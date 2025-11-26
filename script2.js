@@ -43,3 +43,26 @@ if('IntersectionObserver' in window && reveals.length){
   }, { threshold: 0.18, rootMargin: '0px 0px -5% 0px' });
   reveals.forEach(el=>io.observe(el));
 }
+
+
+{
+  const musicScroll = document.querySelector('.music-scroll');
+
+  musicScroll.addEventListener('wheel', function (e) {
+    // if we can still scroll inside the list, prevent page scroll
+    const atTop = musicScroll.scrollTop === 0;
+    const atBottom = musicScroll.scrollHeight - musicScroll.clientHeight === musicScroll.scrollTop;
+
+    if ((e.deltaY < 0 && !atTop) || (e.deltaY > 0 && !atBottom)) {
+      e.stopPropagation();
+      // let the list handle scrolling only
+    }
+  }, { passive: true });
+}
+
+
+const menu=document.querySelector(".menu");
+const toggle=document.querySelector(".toggle");
+toggle.addEventListener("click",()=>{
+  menu.classList.toggle("active");
+})

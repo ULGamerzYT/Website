@@ -1,3 +1,30 @@
+/* container that scrolls only the songs */
+.music-scroll {
+  max-height: 420px;      
+  overflow-y: auto;       
+  padding-right: 4px;     
+}
+
+
+.music-card {
+  margin-bottom: 12px;
+}
+
+.music-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.music-scroll::-webkit-scrollbar-track {
+  background: #111;
+}
+.music-scroll::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 3px;
+}
+.music-scroll::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+
 :root{
   --bg:#0a0a0a;        
   --panel:#121316;    
@@ -16,10 +43,14 @@
 
 *{box-sizing:border-box}
 body{
-  margin:0; background:var(--bg); color:var(--text);
+  margin:0;
+  min-height:100vh;
+  background:var(--bg);       /* keep your site bg variable */
+  color:var(--text);
   font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
   line-height:1.55;
 }
+
 img{max-width:100%; display:block}
 
 .container{width:min(100%,var(--container)); margin-inline:auto; padding-inline:clamp(16px,3vw,32px)}
@@ -140,3 +171,89 @@ input:focus, textarea:focus{border-color:#2fc1ff; box-shadow:0 0 0 3px rgba(47,1
 
 .site-footer{border-top:1px solid var(--border); color:#9aa3b2; padding:22px 0; margin-top:32px}
 .footer-inner{display:flex; justify-content:center}
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+/* ---- SOCIAL MENU POSITION ---- */
+.menu {
+  position: fixed;          /* always visible at bottom */
+  left: 50%;                /* center horizontally */
+  bottom: 40px;             /* distance from bottom; change if needed */
+  transform: translateX(-50%);
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;            /* above other elements */
+}
+
+/* ---- REST OF YOUR ORIGINAL STYLES (unchanged) ---- */
+.menu .toggle {
+  position: relative;
+  height: 60px;
+  width: 60px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: 1.25s;
+  z-index: 5;
+}
+.menu.active .toggle {
+  transform: rotate(360deg);
+  box-shadow:
+    0 6px 8px rgba(0, 0, 0, 0.15),
+    0 0 0 2px #333,
+    0 0 0 8px #fff;
+}
+.menu li {
+  position: absolute;
+  left: 0;
+  list-style: none;
+  transition: 0.5s;
+  transform: rotate(calc(360deg / 8 * var(--i)));
+  transform-origin: 140px;
+  scale: 0;
+  transition-delay: calc(0.05s * var(--i));
+}
+.menu.active li {
+  scale: 1;
+}
+.menu li a {
+  position: relative;
+  display: flex;
+  transform: rotate(calc(360deg / -8 * var(--i)));
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.75rem;
+  color: var(--clr);
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+  transition: 0.5s;
+  text-decoration: none;
+}
+.menu li:hover a {
+  font-size: 2.5rem;
+  box-shadow:
+    0 0 0 2px var(--clr),
+    0 0 0 6px #fff;
+}
+
